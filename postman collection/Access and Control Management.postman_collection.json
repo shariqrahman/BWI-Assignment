@@ -1,0 +1,402 @@
+{
+	"info": {
+		"_postman_id": "ca7bf78b-cdde-4a56-b334-489a9ce8a08f",
+		"name": "Access and Control Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19706766"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"shaad123@gmail.com\",\r\n    \"password\": \"Shaad12@#\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/users/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTliZjYyODRlZGQ2ZGRiNmE2ZTI5OGMiLCJlbWFpbCI6Inlhc2hhMTIzQGdtYWlsLmNvbSIsInBob25lTnVtYmVyIjo4OTc5OTAxOTg5LCJpYXQiOjE3MDQ3MjAwNDQsImV4cCI6MTcwNDcyMzY0NH0.UB9enxaS0Wv3SxvbDROo3yei_saxBJt0EBNTZyQLwGY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/users/profile/659bf6284edd6ddb6a6e298c",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"profile",
+								"659bf6284edd6ddb6a6e298c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTliZWM3ZTBlOWIwYzIwMjBhMTVlMDYiLCJlbWFpbCI6InNoYWFkMTIzQGdtYWlsLmNvbSIsInBob25lTnVtYmVyIjo4OTc5OTAxOTg3LCJpYXQiOjE3MDQ3MjQzMDAsImV4cCI6MTcwNDcyNzkwMH0.irqDrwBTqqNK4K4cVwv7uHVGRN5sHIzI6irLN6MF8l4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Yasha",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "profileImage",
+									"type": "file",
+									"src": "/C:/Users/Mohd_Shariq/Pictures/Mohd Shariq.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/users/update/659bec7e0e9b0c2020a15e06",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"update",
+								"659bec7e0e9b0c2020a15e06"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTliZDE4NmJlMTE2OGFiODliOWJlMjYiLCJlbWFpbCI6ImZhcmhhbi56YWZyaUBnbWFpbC5jb20iLCJwaG9uZU51bWJlciI6ODk3OTkwMTk4MiwiaWF0IjoxNzA0NzEyMjc1LCJleHAiOjE3MDQ3MTU4NzV9.ZRXTQl68TIyf1mpCXgzPwnvJIZzSg40l9zn3ehC1z54",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/users/delete/659bec460e9b0c2020a15e02",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"delete",
+								"659bec460e9b0c2020a15e02"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTliZWMyMjBlOWIwYzIwMjBhMTVkZmUiLCJlbWFpbCI6ImFhZml5YTEyM0BnbWFpbC5jb20iLCJwaG9uZU51bWJlciI6ODk3OTkwMTk4NCwiaWF0IjoxNzA0NzIzNTQxLCJleHAiOjE3MDQ3MjcxNDF9.6PS7MROOZCc5dKke_NIEpcG1vTcHgvuVBKrhmj6zVSw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/users/logout",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "maaz123@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "8979901992",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Maaz",
+									"type": "text"
+								},
+								{
+									"key": "profileImage",
+									"type": "file",
+									"src": "/C:/Users/Mohd_Shariq/Pictures/Mohd Shariq.jpg"
+								},
+								{
+									"key": "password",
+									"value": "Maaz12@#",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/users/signup",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/admin/users/659bea8e0e9b0c2020a15df4",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admin",
+								"users",
+								"659bea8e0e9b0c2020a15df4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/admin/users/profile/659bea8e0e9b0c2020a15df4/659beb160e9b0c2020a15df8",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admin",
+								"users",
+								"profile",
+								"659bea8e0e9b0c2020a15df4",
+								"659beb160e9b0c2020a15df8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Yasha",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/admin/users/update/659bea8e0e9b0c2020a15df4/659beb160e9b0c2020a15df8",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admin",
+								"users",
+								"update",
+								"659bea8e0e9b0c2020a15df4",
+								"659beb160e9b0c2020a15df8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/admin/users/delete/659bea8e0e9b0c2020a15df4/659bec220e9b0c2020a15dfe",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admin",
+								"users",
+								"delete",
+								"659bea8e0e9b0c2020a15df4",
+								"659bec220e9b0c2020a15dfe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/admin/profile/659bea8e0e9b0c2020a15df4",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admin",
+								"profile",
+								"659bea8e0e9b0c2020a15df4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "farhan.zaitri@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "8979901982",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Mohd Farhan",
+									"type": "text"
+								},
+								{
+									"key": "profileImage",
+									"type": "file",
+									"src": "/C:/Users/Mohd_Shariq/Pictures/Mohd Shariq.jpg"
+								},
+								{
+									"key": "password",
+									"value": "Farhan12@#",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/admin/create",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admin",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
