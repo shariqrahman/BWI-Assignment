@@ -7,15 +7,37 @@ class Controller {
         try {
             const { email, phoneNumber, name, password, role } = req.body;
 
-            if (!email || !phoneNumber) {
+            if (!email && !phoneNumber) {
                 return res.status(400).json({ message: `Email or Phone Number is Required` });
             }
 
-            const isAlreadyExists = await Model.findOne({ $or: [{ email }, { phoneNumber }] });
-
-            if (isAlreadyExists) {
-                return res.status(400).json({ message: `User or Admin Already exists` });
+            if (!name) {
+                return res.status(400).json({ message: `Name is Required` });
             }
+
+            if (!password) {
+                return res.status(400).json({ message: `Password is Required` });
+            }
+
+            if (!req.file) {
+                return res.status(400).json({ message: `Profile Image is Required` });
+            }
+
+            if (email) {
+                const isAlreadyExistsEmail = await Model.findOne({ email: email });
+                if (isAlreadyExistsEmail) {
+                    return res.status(400).json({ message: `Email Already Register` });
+                }
+            }
+
+            if (phoneNumber) {
+                const isAlreadyExistsPhone = await Model.findOne({ phoneNumber: phoneNumber });
+
+                if (isAlreadyExistsPhone) {
+                    return res.status(400).json({ message: `Phone Number Already Register` });
+                }
+            }
+
             const encryptedPassword = await bcrypt.hash(password, 10);
 
             await Model.create({
@@ -37,8 +59,12 @@ class Controller {
         try {
             const { email, phoneNumber, password } = req.body;
 
-            if (!email || !phoneNumber && !password) {
+            if (!email && !phoneNumber) {
                 return res.status(400).json({ message: `Email or Phone Number and Password are Required` });
+            }
+
+            if (!password) {
+                return res.status(400).json({ message: `Password is Required` });
             }
 
             const user = await Model.findOne({ $or: [{ email }, { phoneNumber }] });
@@ -76,19 +102,23 @@ class Controller {
             const adminId = req.params.adminId;
             const userId = req.params.userId;
 
+            if(!adminId && !userId) {
+                return res.status(400).json({ message: `Id is required in Params`});
+            }
+
             const admin = await Model.findOne({ _id: adminId, role: 'admin' });
 
             const user = await Model.findOne({ _id: userId, role: 'user' });
 
             if (admin || user) {
                 if (admin) {
-                    return res.status(200).json({ UserProfile1: user });
+                    return res.status(200).json({ UserProfile: user });
                 }
                 else if (user) {
-                     if (req.userId != userId) {
+                    if (req.userId != userId) {
                         return res.status(403).json({ message: `UnAuthorized User!` });
                     }
-                    return res.status(200).json({ UserProfile2: user });
+                    return res.status(200).json({ UserProfile: user });
                 }
             }
         }
@@ -100,6 +130,10 @@ class Controller {
     adminProfile = async (req, res) => {
         try {
             const adminId = req.params.adminId;
+
+            if(!adminId) {
+                return res.status(400).json({ message: `Id is required in Params`});
+            }
 
             const admin = await Model.findById(adminId);
 
@@ -116,6 +150,10 @@ class Controller {
     users = async (req, res) => {
         try {
             const adminId = req.params.adminId;
+
+            if(!adminId) {
+                return res.status(400).json({ message: `Id is required in Params`});
+            }
 
             const admin = await Model.findOne({ _id: adminId, role: 'admin' });
 
@@ -135,8 +173,8 @@ class Controller {
             const adminId = req.params.adminId;
             const userId = req.params.userId;
 
-            if(!(adminId || userId)) {
-                return res.status(400).json({ message: `Id required in params`});
+            if (!adminId && !userId) {
+                return res.status(400).json({ message: `Id required in params` });
             }
 
             const admin = await Model.findOne({ _id: adminId, role: 'admin' });
@@ -153,8 +191,8 @@ class Controller {
                 updatedData.profileImage = '/uploads/' + req.file.filename;
             }
 
-            if(!updatedData.name && !updatedData.profileImage) {
-                return res.status(400).json({ message: `Name or Profile Image is required for Update`})
+            if (!updatedData.name && !updatedData.profileImage) {
+                return res.status(400).json({ message: `Name or Profile Image is required for Update` })
             }
 
             if (admin || user) {
@@ -183,8 +221,8 @@ class Controller {
             const adminId = req.params.adminId;
             const userId = req.params.userId;
 
-            if(!(adminId || userId)) {
-                return res.status(400).json({ message: `Id required in params`});
+            if (!adminId && !userId) {
+                return res.status(400).json({ message: `Id required in params` });
             }
 
             const admin = await Model.findOne({ _id: adminId, role: 'admin' });
